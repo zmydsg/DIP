@@ -42,7 +42,7 @@ plt.show()
 
 # Manually merge two specified clusters (e.g., clusters 0 and 1)
 merged_labels = labels.copy()
-merged_labels[merged_labels == 1] = 0  # Merge cluster 1 into cluster 0
+merged_labels[merged_labels == 2] = 0  # Merge cluster 1 into cluster 0
 
 # Convert merged labels back into image format
 merged_centers = centers
