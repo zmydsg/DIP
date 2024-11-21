@@ -38,7 +38,7 @@ cv2.drawContours(mask, filtered_contours, -1, (255), thickness=cv2.FILLED)
 
 # Use the mask to extract the tiger from the original image
 foreground = cv2.bitwise_and(median_filtered_image, median_filtered_image, mask=mask)
-
+cv2.imwrite('F:/DIP/experiment5/adaptive-histogram_result.png', foreground)
 # Display the original image, mask, and the extracted foreground
 plt.figure(figsize=(18, 6))
 plt.subplot(1, 3, 1)

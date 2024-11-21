@@ -46,7 +46,7 @@ combined_mask = cv2.morphologyEx(combined_mask, cv2.MORPH_OPEN, kernel)
 
 # Use the mask to extract the tiger from the original image
 foreground = cv2.bitwise_and(image, image, mask=combined_mask)
-
+cv2.imwrite('F:/DIP/experiment5/HSV+xingtaixue_result.png', foreground)
 # Display the original image and the extracted foreground
 plt.figure(figsize=(12, 6))
 plt.subplot(1, 2, 1)
@@ -60,3 +60,5 @@ plt.imshow(cv2.cvtColor(foreground, cv2.COLOR_BGR2RGB))
 plt.axis('off')
 
 plt.show()
+
+

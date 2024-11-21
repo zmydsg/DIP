@@ -31,7 +31,7 @@ _, kmeans_mask = cv2.threshold(gray_segmented, 0, 255, cv2.THRESH_BINARY + cv2.T
 
 # Use the mask to extract the tiger from the original image
 foreground = cv2.bitwise_and(image, image, mask=kmeans_mask)
-
+cv2.imwrite('F:/DIP/experiment5/K-means_result.png', foreground)
 # Display the original image, segmented image, and the extracted foreground
 plt.figure(figsize=(18, 6))
 plt.subplot(1, 3, 1)
