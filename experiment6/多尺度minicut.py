@@ -92,6 +92,9 @@ input_image = cv2.imread('F:/DIP/experiment6/origin.png')
 # 分割图像
 segmented_image = segment_image(input_image, coarse_scale=0.5)
 
+#save the result
+cv2.imwrite('F:/DIP/experiment6/multi_size_minicut_result.png', segmented_image)
+
 # 显示结果
 cv2.imshow('Segmented Image', segmented_image)
 cv2.waitKey(0)

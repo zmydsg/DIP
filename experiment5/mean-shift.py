@@ -54,6 +54,10 @@ segmented_image = segmented_image.reshape(image.shape)
 # 转换回RGB格式以显示
 segmented_image_rgb = cv2.cvtColor(np.uint8(segmented_image), cv2.COLOR_BGR2RGB)
 
+
+#save the result
+
+cv2.imwrite('F:/DIP/experiment5/mean_shift_result.png',segmented_image_rgb)
 # 显示前景提取结果
 plt.figure(figsize=(8, 8))
 plt.imshow(segmented_image_rgb)
