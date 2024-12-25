@@ -3,15 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 读取图片
-image = cv2.imread('F:/DIP/experiment1/HSV/original1.png')
+image = cv2.imread('F:\DIP\experiment2\original3.png')
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
 # 定义黄色的 HSV 范围
-lower_yellow = np.array([20, 100, 100])   # 黄色的下限
-upper_yellow = np.array([30, 255, 255])   # 黄色的上限
+lower_blue = np.array([100, 150, 0])   # 蓝色的下限
+upper_blue = np.array([140, 255, 255])   # 蓝色的上限
 
 # 应用阈值分割，生成掩码
-mask = cv2.inRange(hsv_image, lower_yellow, upper_yellow)
+mask = cv2.inRange(hsv_image, lower_blue, upper_blue)
 
 # 使用掩码提取黄色区域
 yellow_extracted = cv2.bitwise_and(image, image, mask=mask)
@@ -35,4 +35,4 @@ plt.tight_layout()
 plt.show()
 
 # 保存提取的黄色区域
-cv2.imwrite('F:/DIP/experiment1/HSV/yellow_extracted_threshold1.png', yellow_extracted)
+cv2.imwrite('F:/DIP/experiment1/HSV/yellow_extracted_threshold3.png', yellow_extracted)

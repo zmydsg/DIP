@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 读取图像
-image = cv2.imread('F:/DIP/experiment1/origin.png')
+image = cv2.imread('F:\DIP\experiment1\HSV\original2.png')
 
 # 手动框定区域
 roi = cv2.selectROI("Image", image, fromCenter=False, showCrosshair=True)
@@ -24,7 +24,7 @@ mask = cv2.inRange(image, lower_bound, upper_bound)
 # 使用mask在原图上提取匹配的区域
 result = cv2.bitwise_and(image, image, mask=mask)
 
-cv2.imwrite('F:/DIP/experiment1/result.png', result)
+# cv2.imwrite('F:/DIP/experiment1/result.png', result)
 # 显示结果
 cv2.imshow('Matched Colors', result)
 cv2.waitKey(0)

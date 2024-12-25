@@ -74,4 +74,4 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # 保存去畸变后的图像
-cv2.imwrite('F:\DIP\experiment3\jiaozheng.png', undistorted_img)
+# cv2.imwrite('F:\DIP\experiment3\jiaozheng.png', undistorted_img)
