@@ -101,9 +101,9 @@ def PbLite(ImageName):
 	Generate Texton Map
 	Filter image using oriented gaussian filter bank
 	"""
-    AbsolutePathImage = os.path.join(
-        os.getcwd(), 'BSDS500', 'Images', ImageName + '.jpg')
-
+    # AbsolutePathImage = os.path.join(
+    #     os.getcwd(), 'BSDS500', 'Images', ImageName + '.jpg')
+    #The path is already found above
     ColorImage = cv2.imread(AbsolutePathImage)
     
 
@@ -306,10 +306,10 @@ def GenerateDoGFilter(Size, SigmaX, SigmaY, Orientation):
         print("Rotated DoG: ")
         print(OrientedDoGFilter)
 
-        plt.imshow(OrientedDoGFilter, cmap=plt.get_cmap(
-            'gray'), interpolation='nearest')
+        # plt.imshow(OrientedDoGFilter, cmap=plt.get_cmap(
+        #     'gray'), interpolation='nearest')
         plt.colorbar()
-        plt.show()
+        # plt.show()
 
     return OrientedDoGFilter
 
@@ -345,9 +345,10 @@ def DisplayFilterBank(FilterBank, Rows, Columns, Cmap, Path, Dst):
     for i in range(1, Columns*Rows + 1):
         img = np.random.randint(10, size=(h, w))
         fig.add_subplot(Rows, Columns, i)
-        plt.imshow(FilterBank[i-1], cmap=Cmap)
+        # plt.imshow(FilterBank[i-1], cmap=Cmap)
     fig.savefig(os.path.join(Path, Dst))
-    plt.show()
+    plt.close(fig)  # close the figure to save memory
+    # plt.show()
 
 # 48 filters
 # first and second order derivatives of Gaussians
@@ -565,7 +566,7 @@ def main():
     for i in range(1, 11):
         print(f"Processing Image: {i}.jpg")
         PbLite(str(i))
-
+    # PbLite(str(i))
 
 if __name__ == '__main__':
     main()

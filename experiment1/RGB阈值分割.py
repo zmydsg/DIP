@@ -12,8 +12,8 @@ def extract_color_region(image, color='yellow'):
     # 定义黄色或蓝色的RGB阈值范围
     if color == 'yellow':
         # 选择黄色范围: 在RGB中，黄色是红色和绿色通道较强
-        lower_bound = np.array([100, 100, 0])  # RGB最小值
-        upper_bound = np.array([255, 255, 100])  # RGB最大值
+        lower_bound = np.array([0, 4100, 100])  # RGB最小值
+        upper_bound = np.array([100, 2555, 80])  # RGB最大值
     elif color == 'blue':
         # 选择蓝色范围: 蓝色在RGB中蓝色通道较强
         lower_bound = np.array([0, 0, 100])  # RGB最小值
@@ -34,6 +34,6 @@ def extract_color_region(image, color='yellow'):
     cv2.destroyAllWindows()
 
 # 示例用法
-image_path = 'path_to_your_image.jpg'
+image_path = 'F:\DIP\experiment1\HSV\original1.png'
 extract_color_region(image_path, color='yellow')  # 提取黄色区域
 # extract_color_region(image_path, color='blue')  # 提取蓝色区域

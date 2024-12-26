@@ -14,7 +14,7 @@ objpoints = []  # 3D点
 imgpoints = []  # 2D点
 
 # 读取棋盘图像
-images = ['F:\DIP\experiment3\qipan.png']  # 加载你上传的棋盘图片路径
+images = ['F:\DIP\experiment3\qipan.jpg']  # 加载你上传的棋盘图片路径
 
 
 for fname in images:
@@ -39,7 +39,7 @@ for fname in images:
         cv2.imshow('Chessboard Corners', img)
         cv2.waitKey(500)
         #保存一下
-        cv2.imwrite('F:\DIP\experiment3\jiaodian.png', img)
+        cv2.imwrite('F:\DIP\experiment3\jiaodian2.png', img)
         print("图像保存成功！")
     else:
         print(f"Failed to find corners in {fname}")
