@@ -16,7 +16,6 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 print(f"脚本启动时的当前工作目录: {os.getcwd()}")
 
-
 def find_image_path(base_dir, image_name):
     # 匹配常见的图像扩展名
     extensions = ['.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG']
@@ -27,7 +26,7 @@ def find_image_path(base_dir, image_name):
             return files[0]  # 返回第一个匹配的文件
     return None
 
-def PbLite(ImageName):
+def Tiny_Pb(ImageName):
     ResultsPath = os.path.join(os.getcwd(), 'Results')
     os.makedirs(ResultsPath, exist_ok=True)  # 确保目录存在
 
@@ -86,7 +85,7 @@ def PbLite(ImageName):
     GammaList = [0.8]
     GaborFilterBank = GenerateGaborFilterBank(38, SigmaList, NumOrientations,
                                               LambdaList, PsiList, GammaList, 'gray', os.path.join(ResultsPath, 'Filters'), 'Gabor.png')
-
+    DisplayFilterBank(GaborFilterBank, 9, 8, 'gray', os.path.join(ResultsPath, 'Filters'), 'Gabor.png')
 
     """
 	Generate Half-disk masks
@@ -95,7 +94,7 @@ def PbLite(ImageName):
 	"""
     HalfDiscBank = GenerateHalfDiscBank(
         [5, 9, 15], 16, 'gray', os.path.join(ResultsPath, 'Filters'), 'HDMasks.png')
-
+    DisplayFilterBank(HalfDiscBank, 6, 8, 'gray', os.path.join(ResultsPath, 'Filters'), 'Half.png')
 
     """
 	Generate Texton Map
@@ -135,8 +134,8 @@ def PbLite(ImageName):
     TextonMap = TextonMap.reshape(ColorImageShape[0], ColorImageShape[1])
     # print(TextonMap.shape)
     plt.imsave(os.path.join(ResultsPath, TextonName), TextonMap, cmap='jet')
-    # plt.imshow(TextonMap, cmap='jet')
-    # plt.show()
+    plt.imshow(TextonMap, cmap='jet')
+    plt.show()
 
     """
 	Generate Texton Gradient (Tg)
@@ -150,8 +149,8 @@ def PbLite(ImageName):
 
     plt.imsave(os.path.join(ResultsPath, TextonGradientName),
                TextonGradient, cmap='jet')
-    # plt.imshow(TextonGradient, cmap='jet')
-    # plt.show()
+    plt.imshow(TextonGradient, cmap='jet')
+    plt.show()
 
 
     """
@@ -172,8 +171,8 @@ def PbLite(ImageName):
     # print(BrightnessMap.shape)
     plt.imsave(os.path.join(ResultsPath, BrightnessName),
                BrightnessMap, cmap='jet')
-    # plt.imshow(BrightnessMap, cmap='jet')
-    # plt.show()
+    plt.imshow(BrightnessMap, cmap='jet')
+    plt.show()
 
     """
 	Generate Brightness Gradient (Bg)
@@ -187,8 +186,8 @@ def PbLite(ImageName):
 
     plt.imsave(os.path.join(ResultsPath, BrightnessGradientName),
                BrightnessGradient, cmap='jet')
-    # plt.imshow(BrightnessGradient, cmap='jet')
-    # plt.show()
+    plt.imshow(BrightnessGradient, cmap='jet')
+    plt.show()
 
     """
 	Generate Color Map
@@ -207,8 +206,8 @@ def PbLite(ImageName):
     ColorMap = ColorMap.reshape(ColorImageShape[0], ColorImageShape[1])
     # print(ColorMap.shape)
     plt.imsave(os.path.join(ResultsPath, ColorName), ColorMap, cmap='jet')
-    # plt.imshow(ColorMap, cmap='jet')
-    # plt.show()
+    plt.imshow(ColorMap, cmap='jet')
+    plt.show()
 
     """
 	Generate Color Gradient (Cg)
@@ -222,8 +221,8 @@ def PbLite(ImageName):
 
     plt.imsave(os.path.join(ResultsPath, ColorGradientName),
                ColorGradient, cmap='jet')
-    # plt.imshow(ColorGradient, cmap='jet')
-    # plt.show()
+    plt.imshow(ColorGradient, cmap='jet')
+    plt.show()
 
     """
 	Read Sobel Baseline
@@ -233,9 +232,9 @@ def PbLite(ImageName):
         os.getcwd(), 'BSDS500', 'SobelBaseline', ImageName + '.png')
     
     SobelBaselineImage = cv2.imread(AbsolutePathSobelBaseline, 0)
-    # cv2.imshow('image', SobelBaselineImage)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow('image', SobelBaselineImage)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
     """
@@ -246,33 +245,33 @@ def PbLite(ImageName):
         os.getcwd(), 'BSDS500', 'CannyBaseline', ImageName + '.png')
 
     CannyBaselineImage = cv2.imread(AbsolutePathCannyBaseline, 0)
-    # cv2.imshow('image', CannyBaselineImage)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow('image', CannyBaselineImage)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
     """
 	Combine responses to get pb-lite output
-	Display PbLite and save image as PbLite_ImageName.png
+	Display Tiny_Pb and save image as Tiny_Pb_ImageName.png
 	use command "cv2.imwrite(...)"
 	"""
-    PbLiteName = 'PbLite_' + ImageName + '.png'
+    Tiny_PbName = 'Tiny_Pb_' + ImageName + '.png'
     w1 = 0.5
     w2 = 0.5
-    PbLite = np.multiply((TextonGradient + BrightnessGradient +
+    Tiny_Pb = np.multiply((TextonGradient + BrightnessGradient +
                           ColorGradient)/(3.0), w1*CannyBaselineImage + w2*SobelBaselineImage)
 
-    plt.imsave(os.path.join(ResultsPath, PbLiteName), PbLite, cmap='gray')
-    # plt.imshow(PbLite, cmap='gray')
-    # plt.show()
+    plt.imsave(os.path.join(ResultsPath, Tiny_PbName), Tiny_Pb, cmap='gray')
+    plt.imshow(Tiny_Pb, cmap='gray')
+    plt.show()
 
-    # cv2.imshow('PbLite', PbLite)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow('Tiny_Pb', Tiny_Pb)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-    # plt.imshow((TextonGradient + BrightnessGradient +
-    #             ColorGradient)/(3.0), cmap='gray')
-    # plt.show()
+    plt.imshow((TextonGradient + BrightnessGradient +
+                ColorGradient)/(3.0), cmap='gray')
+    plt.show()
 
 
 def GenerateGaussian(Size, SigmaX, SigmaY):
@@ -306,10 +305,10 @@ def GenerateDoGFilter(Size, SigmaX, SigmaY, Orientation):
         print("Rotated DoG: ")
         print(OrientedDoGFilter)
 
-        # plt.imshow(OrientedDoGFilter, cmap=plt.get_cmap(
-        #     'gray'), interpolation='nearest')
+        plt.imshow(OrientedDoGFilter, cmap=plt.get_cmap(
+            'gray'), interpolation='nearest')
         plt.colorbar()
-        # plt.show()
+        plt.show()
 
     return OrientedDoGFilter
 
@@ -345,10 +344,10 @@ def DisplayFilterBank(FilterBank, Rows, Columns, Cmap, Path, Dst):
     for i in range(1, Columns*Rows + 1):
         img = np.random.randint(10, size=(h, w))
         fig.add_subplot(Rows, Columns, i)
-        # plt.imshow(FilterBank[i-1], cmap=Cmap)
+        plt.imshow(FilterBank[i-1], cmap=Cmap)
     fig.savefig(os.path.join(Path, Dst))
     plt.close(fig)  # close the figure to save memory
-    # plt.show()
+    plt.show()
 
 # 48 filters
 # first and second order derivatives of Gaussians
@@ -563,10 +562,10 @@ def ComputeGradient(MapGradient):
 
 
 def main():
-    for i in range(1, 11):
-        print(f"Processing Image: {i}.jpg")
-        PbLite(str(i))
-    # PbLite(str(i))
+    # for i in range(1, 11):
+    #     print(f"Processing Image: {i}.jpg")
+    #     Tiny_Pb(str(i))
+    Tiny_Pb(str(11))
 
 if __name__ == '__main__':
     main()
