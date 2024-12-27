@@ -26,7 +26,7 @@ def find_image_path(base_dir, image_name):
             return files[0]  # 返回第一个匹配的文件
     return None
 
-def PbLite(ImageName):
+def Tiny_Pb(ImageName):
     ResultsPath = os.path.join(os.getcwd(), 'Results')
     os.makedirs(ResultsPath, exist_ok=True)  # 确保目录存在
 
@@ -252,20 +252,20 @@ def PbLite(ImageName):
 
     """
 	Combine responses to get pb-lite output
-	Display PbLite and save image as PbLite_ImageName.png
+	Display Tiny_Pb and save image as Tiny_Pb_ImageName.png
 	use command "cv2.imwrite(...)"
 	"""
-    PbLiteName = 'PbLite_' + ImageName + '.png'
+    Tiny_PbName = 'Tiny_Pb_' + ImageName + '.png'
     w1 = 0.5
     w2 = 0.5
-    PbLite = np.multiply((TextonGradient + BrightnessGradient +
+    Tiny_Pb = np.multiply((TextonGradient + BrightnessGradient +
                           ColorGradient)/(3.0), w1*CannyBaselineImage + w2*SobelBaselineImage)
 
-    plt.imsave(os.path.join(ResultsPath, PbLiteName), PbLite, cmap='gray')
-    plt.imshow(PbLite, cmap='gray')
+    plt.imsave(os.path.join(ResultsPath, Tiny_PbName), Tiny_Pb, cmap='gray')
+    plt.imshow(Tiny_Pb, cmap='gray')
     plt.show()
 
-    cv2.imshow('PbLite', PbLite)
+    cv2.imshow('Tiny_Pb', Tiny_Pb)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -564,8 +564,8 @@ def ComputeGradient(MapGradient):
 def main():
     # for i in range(1, 11):
     #     print(f"Processing Image: {i}.jpg")
-    #     PbLite(str(i))
-    PbLite(str(11))
+    #     Tiny_Pb(str(i))
+    Tiny_Pb(str(11))
 
 if __name__ == '__main__':
     main()

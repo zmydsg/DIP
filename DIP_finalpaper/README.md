@@ -29,7 +29,7 @@ color information with a globalization framework.
 Run program for 10 images in the BSDS Images folder: 
 ```
 cd <path to repository>
-python ./DIP_finalpaper/PbLite-Contour-Detection/PbLite.py
+python ./DIP_finalpaper/Tiny_Pb-Contour-Detection/Tiny_Pb.py
 ```
 
 The detailes can be found in Finalpaper.pdf
